@@ -60,7 +60,7 @@ Item {
   function dismiss() {
     root.opened = false
     if (root.shell && typeof root.shell.hide === "function")
-      root.shell.hide((root.manifest && root.manifest.id) || "jmramsay.retile")
+      root.shell.hide((root.manifest && root.manifest.id) || "jram0421.retile")
   }
 
   function toggle() {

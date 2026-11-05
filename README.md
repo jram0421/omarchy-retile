@@ -24,7 +24,7 @@ omarchy plugin add https://github.com/jram0421/omarchy-retile.git --enable
 Then bind a key in `~/.config/hypr/bindings.lua`:
 
 ```lua
-o.bind("SUPER + ALT + R", "Retile windows", "omarchy-shell shell toggle jmramsay.retile")
+o.bind("SUPER + ALT + R", "Retile windows", "omarchy-shell shell toggle jram0421.retile")
 ```
 
 Plugins can't register keybindings themselves, so this step is manual.
