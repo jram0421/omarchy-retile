@@ -4,6 +4,8 @@ An Omarchy overlay plugin. Lays the current workspace's windows out as draggable
 tiles, then applies the arrangement with `hyprctl`. Nothing changes until you
 press Enter.
 
+![Retile showing four windows as a grid of tiles](preview.png)
+
 - **Drag** a tile to move it. Drop it on another tile to swap them, or the other
   tile is pushed to the nearest open space. If there's no room, your tile goes
   back. Tiles never overlap.
@@ -14,6 +16,12 @@ press Enter.
 - `Esc` cancel
 
 If the windows already overlap when you open it, it starts from a grid.
+
+## Presets
+
+| Grid (`G`) | Columns (`C`) | Rows (`R`) |
+|---|---|---|
+| ![Grid](screenshots/grid.png) | ![Columns](screenshots/columns.png) | ![Rows](screenshots/rows.png) |
 
 ## Install
 
