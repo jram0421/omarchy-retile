@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "jmramsay.retile",
+  "name": "Retile",
+  "version": "0.1.0",
+  "author": "jmramsay",
+  "description": "Drag and resize the windows on the current workspace into any arrangement",
+  "kinds": [
+    "overlay"
+  ],
+  "entryPoints": {
+    "overlay": "Retile.qml"
+  }
+}
