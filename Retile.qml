@@ -115,8 +115,8 @@ Item {
           }
           root.tiles = out
           root.selected = out.length ? 0 : -1
-          // Existing windows may overlap; start from a clean grid if so.
-          if (root.hasOverlap()) {
+          // Windows may overlap or sit off-screen; start from a clean grid if so.
+          if (root.hasOverlap() || root.hasOutside()) {
             root.presetGrid()
           }
           if (!out.length) root.statusKey = "status.empty"
@@ -150,6 +150,19 @@ Item {
       var o = list[j]
       if (t.x < o.x + o.w - eps && t.x + t.w > o.x + eps &&
           t.y < o.y + o.h - eps && t.y + t.h > o.y + eps)
+        return true
+    }
+    return false
+  }
+
+  // True if any tile lies (even partly) outside the usable area, e.g. windows
+  // scrolled off-screen by a scrolling layout.
+  function hasOutside() {
+    var eps = 1
+    for (var i = 0; i < root.tiles.length; i++) {
+      var t = root.tiles[i]
+      if (t.x < root.areaX - eps || t.y < root.areaY - eps ||
+          t.x + t.w > root.areaX + root.areaW + eps || t.y + t.h > root.areaY + root.areaH + eps)
         return true
     }
     return false
