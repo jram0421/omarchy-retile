@@ -1,0 +1,7 @@
+{
+  "hint": "Retile  —  drag · corner resizes  ·  C cols  R rows  G grid  ·  T back to tiling  ·  Enter apply  ·  Esc cancel",
+  "status.monitors": "Could not read monitors",
+  "status.windows": "Could not read windows",
+  "status.empty": "No windows on this workspace",
+  "status.applyFailed": "Apply failed (exit %1)"
+}

@@ -12,13 +12,16 @@ import qs.Ui
 Item {
   id: root
 
+  Commons.Translations { id: strings; directory: Qt.resolvedUrl("i18n") }
+
   property var shell: null
   property var manifest: null
 
   property bool opened: false
   property var tiles: []          // {address, title, cls, x, y, w, h} in layout px
   property int selected: -1
-  property string status: ""
+  property string statusKey: ""   // i18n key of the current message, "" for the hint
+  property string statusArg: ""
 
   // Usable area of the active monitor, in layout (logical) pixels.
   property real areaX: 0
@@ -45,7 +48,7 @@ Item {
 
   // ---- lifecycle -------------------------------------------------------
   function open(payloadJson) {
-    root.status = ""
+    root.statusKey = ""
     root.selected = -1
     root.opened = true
     monitorsProc.running = true
@@ -86,7 +89,7 @@ Item {
           root.areaH = mon.height / sc - rv[1] - rv[3] - root.gap * 2
           clientsProc.running = true
         } catch (e) {
-          root.status = "Could not read monitors"
+          root.statusKey = "status.monitors"
         }
       }
     }
@@ -116,9 +119,9 @@ Item {
           if (root.hasOverlap()) {
             root.presetGrid()
           }
-          if (!out.length) root.status = "No windows on this workspace"
+          if (!out.length) root.statusKey = "status.empty"
         } catch (e) {
-          root.status = "Could not read windows"
+          root.statusKey = "status.windows"
         }
       }
     }
@@ -335,7 +338,7 @@ Item {
     id: applyProc
     onExited: function(code) {
       if (code === 0) root.dismiss()
-      else root.status = "Apply failed (exit " + code + ")"
+      else { root.statusArg = String(code); root.statusKey = "status.applyFailed" }
     }
   }
 
@@ -393,8 +396,7 @@ Item {
           font.family: root.fontFamily
           font.pixelSize: Style.font.heading
           elide: Text.ElideRight
-          text: root.status !== "" ? root.status
-              : "Retile  —  drag · corner resizes  ·  C cols  R rows  G grid  ·  T back to tiling  ·  Enter apply  ·  Esc cancel"
+          text: root.statusKey !== "" ? strings.t(root.statusKey).arg(root.statusArg) : strings.t("hint")
         }
 
         // Canvas: the usable monitor area, scaled to fit.

@@ -1,24 +1,42 @@
 # Retile
 
 An Omarchy overlay plugin. Lays the current workspace's windows out as draggable
-tiles, then applies the arrangement with `hyprctl`.
+tiles, then applies the arrangement with `hyprctl`. Nothing changes until you
+press Enter.
 
-- Drag a tile to move it. Dropping onto another tile swaps them, or pushes it to
-  the nearest open space. Tiles never overlap.
-- Pull a tile's bottom-right corner to resize.
+- **Drag** a tile to move it. Drop it on another tile to swap them, or the other
+  tile is pushed to the nearest open space. If there's no room, your tile goes
+  back. Tiles never overlap.
+- **Resize** by pulling a tile's bottom-right corner (it can't push into a neighbour).
 - `C` columns, `R` rows, `G` grid presets
-- `Enter` apply (windows are floated at the chosen positions)
-- `T` hand every window back to the tiling layout
+- `Enter` apply. Windows are floated at the chosen positions and sizes.
+- `T` hand every window on the workspace back to the tiling layout
 - `Esc` cancel
+
+If the windows already overlap when you open it, it starts from a grid.
 
 ## Install
 
-Copy this folder to `~/.config/omarchy/plugins/jmramsay.retile`, add
-`{ "id": "jmramsay.retile" }` to `plugins` in `~/.config/omarchy/shell.json`, and
-bind a key in `~/.config/hypr/bindings.lua`:
+```bash
+omarchy plugin add https://github.com/jram0421/omarchy-retile.git --enable
+```
+
+Then bind a key in `~/.config/hypr/bindings.lua`:
 
 ```lua
 o.bind("SUPER + ALT + R", "Retile windows", "omarchy-shell shell toggle jmramsay.retile")
 ```
 
-Tested on Hyprland 0.56.2.
+Plugins can't register keybindings themselves, so this step is manual.
+
+## Notes
+
+- Tested on Hyprland 0.56.2 (uses the `hl.dsp.window.*` Lua dispatchers).
+- Strings live in `i18n/`; `en.json` is the only catalog so far. Add
+  `<code>.json` files named after Omarchy's language codes to translate.
+- Validate with `omarchy plugin validate .`.
+- After editing the QML in place, restart the shell (`omarchy restart shell`)
+  to be sure the running overlay picks it up. The hot reload did not always
+  apply to an already-loaded overlay.
+
+MIT licensed.

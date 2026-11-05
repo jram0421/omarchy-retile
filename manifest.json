@@ -2,9 +2,10 @@
   "schemaVersion": 1,
   "id": "jmramsay.retile",
   "name": "Retile",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "jmramsay",
-  "description": "Drag and resize the windows on the current workspace into any arrangement",
+  "license": "MIT",
+  "description": "Drag and resize the windows on the current workspace into any arrangement. Tiles never overlap: drop one onto another to swap them or push it to open space. Apply floats the windows at those positions; T hands them back to tiling.",
   "kinds": [
     "overlay"
   ],
